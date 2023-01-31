@@ -8,7 +8,16 @@ module.exports = app => {
         })
     );
 
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get(
+        "/auth/google/callback",
+        passport.authenticate("google"),
+        (req, res) => {
+            res.redirect("/surveys");
+        }
+    );
+    //changed because of using railway instead of Heroku
+    // it was app.get("/auth/google/callback", passport.authenticate("google"));
+
 
 
     app.get('/api/logout', (req, res) => {
