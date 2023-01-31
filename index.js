@@ -1,6 +1,14 @@
 const express = require('express');
-require('./services/passport');
+const mongoose = require('mongoose');
+const keys = require("./config/keys");
+require('./models/User'); //first goes always model
+require('./services/passport'); //execute the passport file
 
+
+
+mongoose.set('strictQuery', false);
+
+mongoose.connect(keys.mongoURI);
 
 const app = express();
 

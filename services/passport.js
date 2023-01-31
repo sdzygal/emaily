@@ -1,7 +1,10 @@
 const passport = require("passport");
 const {Strategy: GoogleStrategy} = require("passport-google-oauth20");
+const mongoose = require('mongoose');
 const keys = require("../config/keys");
 
+
+const User = mongoose.model('users'); // fetch out of mongoose our model class
 
 passport.use(
     new GoogleStrategy(
@@ -11,8 +14,17 @@ passport.use(
             callbackURL: '/auth/google/callback' //the route where user will be sent after he granted the permission
         },
         (accessToken, refreshToken, profile, done) => {
-            console.log('access token', accessToken);
-            console.log('refresh token', refreshToken);
-            console.log('profile', profile);
+            User.findOne({ googleId: profile.id })   //find if we already have the same user
+                .then((existingUser) => {
+                    if (existingUser) {
+                        //we already have a record with the given id
+                        done(null, existingUser);
+                    } else {
+                        //make a new record
+                        new User({ googleId: profile.id })
+                            .save()
+                            .then(user => done(null, user));
+                    }
+                });
         })
 );
