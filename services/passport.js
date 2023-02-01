@@ -25,7 +25,7 @@ passport.use(
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
             callbackURL: '/auth/google/callback', //the route where user will be sent after he granted the permission
-            proxy: true                            //when you`re working on app better to use this callback /auth/google/callback
+            // proxy: true                            //when you`re working on app better to use this callback /auth/google/callback
         },
         (accessToken, refreshToken, profile, done) => {
             User.findOne({ googleId: profile.id })   //find if we already have the same user
