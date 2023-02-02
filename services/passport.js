@@ -27,18 +27,16 @@ passport.use(
             callbackURL: '/auth/google/callback', //the route where user will be sent after he granted the permission
             // proxy: true                            //when you`re working on app better to use this callback /auth/google/callback
         },
-        (accessToken, refreshToken, profile, done) => {
-            User.findOne({ googleId: profile.id })   //find if we already have the same user
-                .then((existingUser) => {
+       async (accessToken, refreshToken, profile, done) => {
+         const existingUser = await User.findOne({ googleId: profile.id })   //find if we already have the same user
                     if (existingUser) {
                         //we already have a record with the given id
-                        done(null, existingUser);
-                    } else {
-                        //make a new record
-                        new User({ googleId: profile.id })
-                            .save()
-                            .then(user => done(null, user));
+                        return done(null, existingUser);
                     }
-                });
+                    //removed else, because added return
+                        //make a new record
+                      const user = await new User({ googleId: profile.id }).save()
+                        done(null, user);
+
         })
 );
