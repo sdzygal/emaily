@@ -6,7 +6,7 @@ class Mailer extends helper.Mail {
     constructor({ subject, recipients }, content) {
         super(); //es 2015 classes
 
-        this.sgApi= sendgrid(keys.sendGridKey);
+        this.sgApi= sendgrid('keys.sendGridKey');
         this.subject = subject;
         this.body = new helper.Content('text/html', content);
         this.recipients = this.formatAddresses(recipients);
@@ -47,7 +47,7 @@ class Mailer extends helper.Mail {
             body: this.toJSON()
         });
 
-        const response = this.sgApi.API(request);
+        const response = await this.sgApi.API(request);
         return response;
     }
 }
