@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FETCH_USER } from "./types";
 
 
+
 //action creator
 // export const fetchUser = () => {
 //     return function (dispatch) {
@@ -24,4 +25,12 @@ export const handleToken = (token) => async dispatch => {
     const res = await axios.post('/api/stripe', token);
 
     dispatch({ type: FETCH_USER, payload: res.data.credits });
+};
+
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', values);
+
+  history.push('/surveys');
+
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
