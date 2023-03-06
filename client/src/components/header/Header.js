@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Payments from "./Payments";
+import Payments from "../Payments";
 import {BiSearch, BiExitFullscreen} from "react-icons/bi";
 import {RiToggleLine} from "react-icons/ri";
 
 
-import "./components.css";
+import "./header.css";
 
 class Header extends Component {
     renderContent() {
