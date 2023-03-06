@@ -3,10 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import SurveyNew from "./surveys/SurveyNew";
-
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
+import "./app.css";
 
 
 class App extends Component {
