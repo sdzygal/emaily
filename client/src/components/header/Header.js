@@ -19,6 +19,10 @@ class Header extends Component {
                          </li>
             default:
                 return [
+                    <li key="6" className="search">
+                        <input type="text" placeholder="Search..." />
+                        <BiSearch className="searchIcon" />
+                    </li>,
                     <li key="4" className="icon"><RiToggleLine /></li>,
                     <li key="5" className="icon"><BiExitFullscreen /></li>,
                     <li key="1"><Payments /></li>,
@@ -38,10 +42,6 @@ class Header extends Component {
                     >
                         emaily
                     </Link>
-                    <div className="search">
-                        <input type="text" placeholder="Search..." />
-                        <BiSearch className="searchIcon" />
-                    </div>
                     <ul className="right">
                         {this.renderContent()}
                     </ul>
